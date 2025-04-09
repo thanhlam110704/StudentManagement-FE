@@ -1,0 +1,70 @@
+  .detail-container {
+    
+    padding-left: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    max-width: 100%;
+    
+  }
+  
+
+  
+  .detail-container h2 {
+    font-size: 24px;
+    align-items: center;
+  }
+  
+  .header-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    
+  }
+  
+  .info-table {
+    max-width: 60%;
+    border-radius: 6px;
+  }
+  
+  .detail-container .ant-descriptions-item-label {
+    width: 150px;
+    font-weight: bold;
+  }
+  
+  .detail-container .ant-descriptions-bordered > .ant-descriptions-view,
+  .detail-container .ant-descriptions-bordered > .ant-descriptions-view .ant-descriptions-row {
+    border-color: #babfc7;
+  }
+  
+  .pagination-container-detail{
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 40px;
+    display: flex;
+  }
+
+
+  .detail-table {
+    min-height: 250px;
+    width: 98.5%;
+    flex: 1;
+    max-height: 400px; 
+    overflow-y: auto; 
+  }
+
+  .ant-tabs {
+    margin-top: 16px;
+  }
+
+  .add-button-detail{
+    margin-bottom: 16px;
+  }

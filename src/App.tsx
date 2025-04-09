@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Layout } from "antd";
+import MenuComponent from "./components/MenuComponent";
+import StudentTable from "./pages/Student/StudentTable";
+import StudentDetail from "./pages/Student/StudentDetail";
+import ClassTable from "./pages/Class/ClassTable";
+import ClassDetail from "./pages/Class/ClassDetail";
+import "./styles/app.css";
 
-function App() {
+const { Content } = Layout;
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Layout style={{ minHeight: "100vh" }}>
+        <MenuComponent />
+        <Layout className="site-layout">
+          <Content className="app-content">
+            <Routes>
+              <Route path="/class" element={<ClassTable />} />
+              <Route path="/class/:id/:tab" element={<ClassDetail />} />
+              <Route path="/student" element={<StudentTable />} />
+              <Route path="/student/:id/:tab" element={<StudentDetail />} />
+              <Route
+                path="/"
+                element={
+                  <div className="welcome-container">
+                    <h2>Welcome To Management System</h2>
+                  </div>
+                }
+              />
+            </Routes>
+          </Content>
+        </Layout>
+      </Layout>
+    </Router>
   );
-}
+};
 
 export default App;

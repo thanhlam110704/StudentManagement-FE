@@ -1,0 +1,68 @@
+.table-container {
+    padding: 20px;
+    padding-left: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ag-theme-alpine {
+    min-height: 250px;
+    width: 98.5%;
+    flex: 1;
+    max-height: 480px; 
+    overflow-y: auto;
+  }
+
+  .pagination-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 50px; 
+   
+  }
+
+
+  .table-container h2 {
+    margin-bottom: 16px;
+    font-size: 24px;
+  }
+  
+  .header {
+    align-items: center;
+  }
+  
+  
+  .action-button {
+    margin-right: 8px;
+  }
+  
+  .action-button.info {
+    color: #1890ff;
+    border-color: #1890ff;
+  }
+
+  
+  
+  .action-button.edit {
+    color: #faad14;
+    border-color: #faad14;
+  }
+  
+  .action-button.delete {
+    color: #ff4d4f;
+    border-color: #ff4d4f;
+  }
+  
+  
+  .modal-form .ant-input,
+  .modal-form .ant-picker {
+    width: 100%;
+  }
+  
+  .modal-form .ant-radio-group {
+    display: flex;
+    gap: 10px;
+  }

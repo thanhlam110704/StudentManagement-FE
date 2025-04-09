@@ -1,0 +1,34 @@
+.site-layout {
+    transition: margin 0.2s;
+  }
+  
+  .welcome-container {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .welcome-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  /* For collapsed menu */
+  .ant-layout-sider-collapsed + .site-layout {
+    margin-left: 80px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .site-layout {
+      margin-left: 0;
+    }
+    
+    .ant-layout-sider-collapsed + .site-layout {
+      margin-left: 0;
+    }
+    
+    .app-content {
+      margin: 8px;
+      padding: 12px;
+    }
+  }

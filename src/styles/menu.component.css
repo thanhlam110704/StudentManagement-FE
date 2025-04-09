@@ -1,0 +1,43 @@
+.menu-sider {
+    height: 100vh;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 16px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .custom-sider {
+    width: 300px !important; 
+    min-width: 250px !important;
+    max-width: 300px !important;
+    transition: all 0.2s;
+  }
+  
+  .menu-header.dark {
+    color: #fff;
+  }
+  
+  .menu-header.light {
+    color: #000;
+  }
+  
+  .theme-switch {
+    margin-left: 10px;
+    margin-top: 1.5px;
+    display: flex;
+  }
+  
+  .menu-content {
+    border-radius: 8px;
+    overflow: hidden;
+  }
