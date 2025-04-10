@@ -2,14 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Descriptions, message } from "antd";
 import { formatDate } from "../../../utils/dateConvert";
 import { getStudentDetail } from "../api/studentApi";
-
-interface StudentInfo {
-  name: string;
-  email: string;
-  phone: string;
-  gender: boolean;
-  dateOfBirth: string;
-}
+import { StudentInfo } from "../model/student";
 
 interface StudentDetailInfoProps {
   studentId: string | number;

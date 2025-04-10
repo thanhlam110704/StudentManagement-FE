@@ -11,22 +11,7 @@ import { textFilterParams, dateFilterParams, numberFilterParams } from "../../..
 import { getFilterModel } from "../../../utils/filterModel";
 import { formatDate } from "../../../utils/dateConvert";
 import { GridApi, GridReadyEvent, ColDef } from "@ag-grid-community/core";
-
-interface ClassData {
-  id: string | number;
-  name: string;
-  capacity: number;
-  startDate: string;
-  endDate: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Filter {
-  field: string;
-  value: string;
-  operator: string;
-}
+import { ClassData, Filter } from "../model/student";
 
 interface StudentDetailListProps {
   studentId: string | number;

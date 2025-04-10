@@ -3,15 +3,7 @@ import { Form, Input, DatePicker, Button, Radio, message } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import { createStudent, updateStudent } from "../api/studentApi";
 import { handleApiError, ApiError } from "../../../utils/handleApiErrors";
-
-export interface StudentFormValues {
-  id?: string | number;
-  name: string;
-  email: string;
-  phone: string;
-  gender: boolean;
-  dateOfBirth?: Dayjs;
-}
+import { StudentFormValues } from "../model/student";
 
 interface StudentFormProps {
   initialValues?: StudentFormValues;
@@ -67,27 +59,15 @@ const StudentForm: React.FC<StudentFormProps> = ({ initialValues, onSuccess }) =
 
   return (
     <Form form={form} layout="vertical" onFinish={handleSubmit}>
-      <Form.Item
-        name="name"
-        label="Full Name"
-        required={true}
-      >
+      <Form.Item name="name" label="Full Name" required={true}>
         <Input placeholder="Enter full name" />
       </Form.Item>
 
-      <Form.Item
-        name="email"
-        label="Email"
-        required={true}
-      >
+      <Form.Item name="email" label="Email" required={true}>
         <Input placeholder="Enter email" />
       </Form.Item>
 
-      <Form.Item
-        name="phone"
-        label="Phone Number"
-        required={true}
-      >
+      <Form.Item name="phone" label="Phone Number" required={true}>
         <Input placeholder="Enter phone number" />
       </Form.Item>
 
@@ -99,12 +79,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ initialValues, onSuccess }) =
       </Form.Item>
 
       <Form.Item name="dateOfBirth" label="Birth Date" required={true}>
-        <DatePicker
-          format="DD/MM/YYYY"
-          style={{ width: "100%" }}
-          placeholder="Select birth date"
-          
-        />
+        <DatePicker format="DD/MM/YYYY" style={{ width: "100%" }} placeholder="Select birth date" />
       </Form.Item>
 
       <Form.Item>

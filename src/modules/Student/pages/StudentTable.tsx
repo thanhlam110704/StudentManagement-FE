@@ -7,32 +7,16 @@ import { ModuleRegistry, GridApi, GridReadyEvent, ColDef } from "@ag-grid-commun
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import StudentForm, { StudentFormValues } from "../modal-form/StudentForm";
+import StudentForm from "../modal-form/StudentForm";
 import { getStudents, getStudentDetail, deleteStudent } from "../api/studentApi";
 import { textFilterParams, dateFilterParams, numberFilterParams } from "../../../utils/filterParams";
 import { getFilterModel } from "../../../utils/filterModel";
 import { formatDate } from "../../../utils/dateConvert";
 import "../../../styles/table.component.css";
 import dayjs from "dayjs";
+import { StudentFormValues, StudentData, Filter } from "../model/student";
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
-
-interface StudentData {
-  id: string | number;
-  name: string;
-  email: string;
-  phone: string;
-  gender: boolean;  
-  dateOfBirth: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Filter {
-  field: string;
-  value: string;
-  operator: string;
-}
 
 const StudentTable: React.FC = () => {
   const [gridApi, setGridApi] = useState<GridApi | null>(null);
@@ -104,7 +88,6 @@ const StudentTable: React.FC = () => {
     setLoading(true);
     try {
       const data: StudentData = await getStudentDetail(id);
-      // Convert string dates to Dayjs for StudentForm
       const formData: StudentFormValues = {
         ...data,
         dateOfBirth: data.dateOfBirth ? dayjs(data.dateOfBirth) : undefined,

@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Form, Input, DatePicker, Button, message } from "antd";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { createClass, updateClass } from "../api/classApi";
 import { handleApiError, ApiError } from "../../../utils/handleApiErrors";
-
-export interface ClassFormValues {
-  id?: string | number;
-  name: string;
-  capacity: number;
-  startDate?: Dayjs;
-  endDate?: Dayjs;
-}
+import { ClassFormValues } from "../model/class"; 
 
 interface ClassFormProps {
   initialValues?: ClassFormValues;
@@ -68,42 +61,24 @@ const ClassForm: React.FC<ClassFormProps> = ({ initialValues, onSuccess }) => {
 
   return (
     <Form form={form} layout="vertical" onFinish={handleSubmit}>
-      <Form.Item
-        name="name"
-        label="Class Name"
-        required={true}>
+      <Form.Item name="name" label="Class Name" required={true}>
         <Input placeholder="Enter class name" />
       </Form.Item>
-
-      <Form.Item
-        name="capacity"
-        label="Capacity"
-        required={true}> 
+      <Form.Item name="capacity" label="Capacity" required={true}>
         <Input type="number" placeholder="Enter class capacity" />
       </Form.Item>
-
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item name="startDate" label="Start Date" required={true}>
-            <DatePicker
-              format="DD/MM/YYYY"
-              style={{ width: "100%" }}
-              placeholder="Select start date"
-            />
+            <DatePicker format="DD/MM/YYYY" style={{ width: "100%" }} placeholder="Select start date" />
           </Form.Item>
         </Col>
-
         <Col span={12}>
           <Form.Item name="endDate" label="End Date" required={true}>
-            <DatePicker
-              format="DD/MM/YYYY"
-              style={{ width: "100%" }}
-              placeholder="Select end date"
-            />
+            <DatePicker format="DD/MM/YYYY" style={{ width: "100%" }} placeholder="Select end date" />
           </Form.Item>
         </Col>
       </Row>
-
       <Form.Item>
         <Button type="primary" htmlType="submit" loading={loading}>
           {initialValues ? "Update" : "Create"}

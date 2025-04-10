@@ -3,12 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import DetailComponent from "../../../components/DetailComponent";
 import StudentDetailInfo from "../pages/StudentDetailInfo";
 import StudentDetailList from "../pages/StudentDetailList";
-
-interface Tab {
-  label: string;
-  key: string;
-  component: React.ReactNode;
-}
+import { Tab } from "../model/student";
 
 const StudentDetail: React.FC = () => {
   const { id, tab } = useParams<{ id?: string; tab?: string }>();
@@ -21,7 +16,6 @@ const StudentDetail: React.FC = () => {
     }
   }, [tab, activeTab]);
 
- 
   if (!id) {
     navigate("/student");
     return null;

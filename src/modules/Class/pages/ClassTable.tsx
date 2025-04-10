@@ -7,31 +7,16 @@ import { ModuleRegistry, GridApi, GridReadyEvent, ColDef } from "@ag-grid-commun
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import ClassForm, { ClassFormValues } from "../modal-form/ClassForm"; 
+import ClassForm from "../modal-form/ClassForm";
 import { textFilterParams, dateFilterParams, numberFilterParams } from "../../../utils/filterParams";
 import { deleteClass, getClasses, getClassDetail } from "../api/classApi";
-import { getFilterModel } from '../../../utils/filterModel';
+import { getFilterModel } from "../../../utils/filterModel";
 import { formatDate } from "../../../utils/dateConvert";
 import "../../../styles/table.component.css";
 import dayjs from "dayjs";
+import { ClassFormValues, ClassData, Filter } from "../model/class"; 
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
-
-interface ClassData {
-  id: string | number;
-  name: string;
-  capacity: number;
-  startDate: string;
-  endDate: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Filter {
-  field: string;
-  value: string;
-  operator: string;
-}
 
 const ClassTable: React.FC = () => {
   const [gridApi, setGridApi] = useState<GridApi | null>(null);
@@ -94,8 +79,8 @@ const ClassTable: React.FC = () => {
       setSortBy(sortedColumn.colId);
       setSortDirection(sortedColumn.sort as "asc" | "desc");
     } else {
-      setSortBy('');
-      setSortDirection('');
+      setSortBy("");
+      setSortDirection("");
     }
   };
 
@@ -127,83 +112,86 @@ const ClassTable: React.FC = () => {
     }
   }, [loadClasses]);
 
-  const columnDefs: ColDef<ClassData>[] = useMemo(() => [
-    {
-      headerName: "ID",
-      field: "id",
-      width: 80,
-      sortable: true,
-      filterParams: numberFilterParams,
-    } as ColDef<ClassData>,
-    {
-      headerName: "Class Name",
-      field: "name",
-      width: 140,
-      filter: true,
-      filterParams: textFilterParams,
-    } as ColDef<ClassData>,
-    {
-      headerName: "Capacity",
-      field: "capacity",
-      width: 140,
-      sortable: true,
-      filterParams: numberFilterParams,
-    } as ColDef<ClassData>,
-    {
-      headerName: "Start Date",
-      field: "startDate",
-      valueFormatter: (params) => formatDate(params.value as string),
-      width: 160,
-      filter: "agDateColumnFilter",
-      filterParams: dateFilterParams,
-    } as ColDef<ClassData>,
-    {
-      headerName: "End Date",
-      field: "endDate",
-      valueFormatter: (params) => formatDate(params.value as string),
-      width: 160,
-      filter: "agDateColumnFilter",
-      filterParams: dateFilterParams,
-    } as ColDef<ClassData>,
-    {
-      headerName: "Created At",
-      field: "createdAt",
-      valueFormatter: (params) => formatDate(params.value as string),
-      width: 160,
-      filter: "agDateColumnFilter",
-      filterParams: dateFilterParams,
-    } as ColDef<ClassData>,
-    {
-      headerName: "Updated At",
-      field: "updatedAt",
-      valueFormatter: (params) => formatDate(params.value as string),
-      width: 160,
-      filter: "agDateColumnFilter",
-      filterParams: dateFilterParams,
-    } as ColDef<ClassData>,
-    {
-      headerName: "Actions",
-      width: 160,
-      cellRenderer: (params: { data: ClassData }) => (
-        <div className="action-buttons">
-          <Button
-            icon={<InfoOutlined />}
-            onClick={() => navigate(`/class/${params.data.id}?tab=InfomationClass`)}
-            className="action-button info"
-          />
-          <Button
-            icon={<EditOutlined />}
-            onClick={() => handleEdit(params.data.id)}
-            className="action-button edit"
-            loading={loading}
-          />
-          <Popconfirm title="Are you sure you want to delete?" onConfirm={() => handleDelete(params.data.id)}>
-            <Button icon={<DeleteOutlined />} className="action-button delete" />
-          </Popconfirm>
-        </div>
-      ),
-    } as ColDef<ClassData>,
-  ], [navigate, loading, handleEdit, handleDelete]);
+  const columnDefs: ColDef<ClassData>[] = useMemo(
+    () => [
+      {
+        headerName: "ID",
+        field: "id",
+        width: 80,
+        sortable: true,
+        filterParams: numberFilterParams,
+      } as ColDef<ClassData>,
+      {
+        headerName: "Class Name",
+        field: "name",
+        width: 140,
+        filter: true,
+        filterParams: textFilterParams,
+      } as ColDef<ClassData>,
+      {
+        headerName: "Capacity",
+        field: "capacity",
+        width: 140,
+        sortable: true,
+        filterParams: numberFilterParams,
+      } as ColDef<ClassData>,
+      {
+        headerName: "Start Date",
+        field: "startDate",
+        valueFormatter: (params) => formatDate(params.value as string),
+        width: 160,
+        filter: "agDateColumnFilter",
+        filterParams: dateFilterParams,
+      } as ColDef<ClassData>,
+      {
+        headerName: "End Date",
+        field: "endDate",
+        valueFormatter: (params) => formatDate(params.value as string),
+        width: 160,
+        filter: "agDateColumnFilter",
+        filterParams: dateFilterParams,
+      } as ColDef<ClassData>,
+      {
+        headerName: "Created At",
+        field: "createdAt",
+        valueFormatter: (params) => formatDate(params.value as string),
+        width: 160,
+        filter: "agDateColumnFilter",
+        filterParams: dateFilterParams,
+      } as ColDef<ClassData>,
+      {
+        headerName: "Updated At",
+        field: "updatedAt",
+        valueFormatter: (params) => formatDate(params.value as string),
+        width: 160,
+        filter: "agDateColumnFilter",
+        filterParams: dateFilterParams,
+      } as ColDef<ClassData>,
+      {
+        headerName: "Actions",
+        width: 160,
+        cellRenderer: (params: { data: ClassData }) => (
+          <div className="action-buttons">
+            <Button
+              icon={<InfoOutlined />}
+              onClick={() => navigate(`/class/${params.data.id}?tab=InfomationClass`)}
+              className="action-button info"
+            />
+            <Button
+              icon={<EditOutlined />}
+              onClick={() => handleEdit(params.data.id)}
+              className="action-button edit"
+              loading={loading}
+            />
+            <Popconfirm title="Are you sure you want to delete?" onConfirm={() => handleDelete(params.data.id)}>
+              <Button icon={<DeleteOutlined />} className="action-button delete" />
+            </Popconfirm>
+          </div>
+        ),
+      } as ColDef<ClassData>,
+    ],
+    [navigate, loading, handleEdit, handleDelete]
+  );
 
   return (
     <div className="table-container">

@@ -6,25 +6,10 @@ import AddStudentModal from "../../ClassStudent/modal-form/AddStudentModal";
 import { fetchAvailableStudents, removeStudentFromClass } from "../../ClassStudent/api/classStudentApi";
 import { getStudentsListofClass } from "../api/classApi";
 import { textFilterParams, dateFilterParams, numberFilterParams } from "../../../utils/filterParams";
-import { getFilterModel } from '../../../utils/filterModel';
+import { getFilterModel } from "../../../utils/filterModel";
 import { formatDate } from "../../../utils/dateConvert";
 import { GridApi, GridReadyEvent, ColDef } from "@ag-grid-community/core";
-
-interface Student {
-  id: string | number;
-  name: string;
-  email: string;
-  phone: string;
-  dateOfBirth: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Filter {
-  field: string;
-  value: string;
-  operator: string;
-}
+import { Student, Filter } from "../model/class"; 
 
 interface ClassDetailListProps {
   classId: string | number;
@@ -41,7 +26,8 @@ const ClassDetailList: React.FC<ClassDetailListProps> = ({ classId }) => {
   const [totalItems, setTotalItems] = useState<number>(0);
   const [filter, setFilter] = useState<Filter[]>([]);
   const [sortBy, setSortBy] = useState<string>("");
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc" | "">(""); 
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc" | "">("");
+
   const hasFetched = useRef<boolean>(false);
 
   const loadAvailableStudents = useCallback(async () => {
@@ -110,77 +96,80 @@ const ClassDetailList: React.FC<ClassDetailListProps> = ({ classId }) => {
       setSortBy(sortedColumn.colId);
       setSortDirection(sortedColumn.sort as "asc" | "desc");
     } else {
-      setSortBy('');
-      setSortDirection('');
+      setSortBy("");
+      setSortDirection("");
     }
   };
 
-  const columnDefs: ColDef<Student>[] = useMemo(() => [
-    {
-      headerName: "ID",
-      field: "id",
-      width: 80,
-      sortable: true,
-      filterParams: numberFilterParams,
-    } as ColDef<Student>,
-    {
-      headerName: "Full Name",
-      field: "name",
-      width: 160,
-      filter: true,
-      filterParams: textFilterParams,
-    } as ColDef<Student>,
-    {
-      headerName: "Email",
-      field: "email",
-      width: 160,
-      filter: true,
-      filterParams: textFilterParams,
-    } as ColDef<Student>,
-    {
-      headerName: "Phone",
-      field: "phone",
-      width: 160,
-      filter: true,
-      filterParams: textFilterParams,
-    } as ColDef<Student>,
-    {
-      headerName: "Date of Birth",
-      field: "dateOfBirth",
-      valueFormatter: (params) => formatDate(params.value as string),
-      width: 150,
-      filter: "agDateColumnFilter",
-      filterParams: dateFilterParams,
-    } as ColDef<Student>,
-    {
-      headerName: "Created At",
-      field: "createdAt",
-      valueFormatter: (params) => formatDate(params.value as string),
-      width: 150,
-      filter: "agDateColumnFilter",
-      filterParams: dateFilterParams,
-    } as ColDef<Student>,
-    {
-      headerName: "Updated At",
-      field: "updatedAt",
-      valueFormatter: (params) => formatDate(params.value as string),
-      width: 150,
-      filter: "agDateColumnFilter",
-      filterParams: dateFilterParams,
-    } as ColDef<Student>,
-    {
-      headerName: "Actions",
-      width: 140,
-      cellRenderer: (params: { data: Student }) => (
-        <Popconfirm
-          title="Are you sure to remove this student?"
-          onConfirm={() => handleRemoveStudent(params.data.id)}
-        >
-          <Button icon={<DeleteOutlined />} danger />
-        </Popconfirm>
-      ),
-    } as ColDef<Student>,
-  ], [handleRemoveStudent]);
+  const columnDefs: ColDef<Student>[] = useMemo(
+    () => [
+      {
+        headerName: "ID",
+        field: "id",
+        width: 80,
+        sortable: true,
+        filterParams: numberFilterParams,
+      } as ColDef<Student>,
+      {
+        headerName: "Full Name",
+        field: "name",
+        width: 160,
+        filter: true,
+        filterParams: textFilterParams,
+      } as ColDef<Student>,
+      {
+        headerName: "Email",
+        field: "email",
+        width: 160,
+        filter: true,
+        filterParams: textFilterParams,
+      } as ColDef<Student>,
+      {
+        headerName: "Phone",
+        field: "phone",
+        width: 160,
+        filter: true,
+        filterParams: textFilterParams,
+      } as ColDef<Student>,
+      {
+        headerName: "Date of Birth",
+        field: "dateOfBirth",
+        valueFormatter: (params) => formatDate(params.value as string),
+        width: 150,
+        filter: "agDateColumnFilter",
+        filterParams: dateFilterParams,
+      } as ColDef<Student>,
+      {
+        headerName: "Created At",
+        field: "createdAt",
+        valueFormatter: (params) => formatDate(params.value as string),
+        width: 150,
+        filter: "agDateColumnFilter",
+        filterParams: dateFilterParams,
+      } as ColDef<Student>,
+      {
+        headerName: "Updated At",
+        field: "updatedAt",
+        valueFormatter: (params) => formatDate(params.value as string),
+        width: 150,
+        filter: "agDateColumnFilter",
+        filterParams: dateFilterParams,
+      } as ColDef<Student>,
+      {
+        headerName: "Actions",
+        width: 140,
+        cellRenderer: (params: { data: Student }) => (
+          <Popconfirm
+            title="Are you sure to remove this student?"
+            onConfirm={() => handleRemoveStudent(params.data.id)}
+          >
+            <Button icon={<DeleteOutlined />} danger />
+          </Popconfirm>
+        ),
+      } as ColDef<Student>,
+    ],
+    [handleRemoveStudent]
+  );
 
   return (
     <>
@@ -196,7 +185,7 @@ const ClassDetailList: React.FC<ClassDetailListProps> = ({ classId }) => {
         Add Student
       </Button>
 
-      <div className="ag-theme-alpine" style={{ height: 'auto', width: '100%' }}>
+      <div className="ag-theme-alpine" style={{ height: "auto", width: "100%" }}>
         <AgGridReact<Student>
           className="detail-table"
           rowData={students}

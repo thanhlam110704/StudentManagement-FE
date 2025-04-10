@@ -3,22 +3,17 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import DetailComponent from "../../../components/DetailComponent";
 import ClassDetailInfo from "../pages/ClassDetailInfo";
 import ClassDetailList from "../pages/ClassDetailList";
-
-interface Tab {
-  label: string;
-  key: string;
-  component: React.ReactNode;
-}
+import { Tab } from "../model/class"; 
 
 const ClassDetail: React.FC = () => {
-  const { id } = useParams<{ id?: string }>(); 
+  const { id } = useParams<{ id?: string }>();
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // Get tab from query parameters
   const queryParams = new URLSearchParams(location.search);
   const tabFromUrl = queryParams.get("tab");
-  
+
   const [activeTab, setActiveTab] = useState<string>(tabFromUrl || "InfomationClass");
 
   useEffect(() => {
