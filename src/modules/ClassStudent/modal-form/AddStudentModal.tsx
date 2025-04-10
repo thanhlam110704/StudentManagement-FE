@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Select, Button, message } from "antd";
-import CustomModal from "../../components/CustomModal";
-import { addStudentToClass } from "../../api/classStudentApi";
+import CustomModal from "../../../components/CustomModal";
+import { addStudentToClass } from "../api/classStudentApi";
 
 interface Student {
   id: string | number;

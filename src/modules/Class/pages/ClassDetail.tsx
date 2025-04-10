@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import DetailComponent from "../../components/DetailComponent";
-import ClassDetailInfo from "../../pages/Class/ClassDetailInfo";
-import ClassDetailList from "../../pages/Class/ClassDetailList";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import DetailComponent from "../../../components/DetailComponent";
+import ClassDetailInfo from "../pages/ClassDetailInfo";
+import ClassDetailList from "../pages/ClassDetailList";
 
 interface Tab {
   label: string;
@@ -11,18 +11,22 @@ interface Tab {
 }
 
 const ClassDetail: React.FC = () => {
-  const { id, tab } = useParams<{ id?: string; tab?: string }>();
+  const { id } = useParams<{ id?: string }>(); 
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<string>(tab || "InfomationClass");
+  const location = useLocation();
+  
+  // Get tab from query parameters
+  const queryParams = new URLSearchParams(location.search);
+  const tabFromUrl = queryParams.get("tab");
+  
+  const [activeTab, setActiveTab] = useState<string>(tabFromUrl || "InfomationClass");
 
-  // Move useEffect to top level
   useEffect(() => {
-    if (tab && tab !== activeTab) {
-      setActiveTab(tab);
+    if (tabFromUrl && tabFromUrl !== activeTab) {
+      setActiveTab(tabFromUrl);
     }
-  }, [tab, activeTab]);
+  }, [tabFromUrl, activeTab]);
 
-  // Handle undefined id
   if (!id) {
     navigate("/class");
     return null;
@@ -30,7 +34,7 @@ const ClassDetail: React.FC = () => {
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);
-    navigate(`/class/${id}/${key}`);
+    navigate(`/class/${id}?tab=${key}`);
   };
 
   const tabs: Tab[] = [

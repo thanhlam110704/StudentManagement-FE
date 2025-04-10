@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Descriptions, message } from "antd";
-import { formatDate } from "../../utils/dateConvert";
-import { getClassDetail } from "../../api/classApi";
+import { formatDate } from "../../../utils/dateConvert";
+import { getClassDetail } from "../api/classApi";
 
 interface ClassInfo {
   name: string;

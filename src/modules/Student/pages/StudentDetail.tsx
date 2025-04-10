@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import DetailComponent from "../../components/DetailComponent";
-import StudentDetailInfo from "../../pages/Student/StudentDetailInfo";
-import StudentDetailList from "../../pages/Student/StudentDetailList";
+import DetailComponent from "../../../components/DetailComponent";
+import StudentDetailInfo from "../pages/StudentDetailInfo";
+import StudentDetailList from "../pages/StudentDetailList";
 
 interface Tab {
   label: string;
@@ -21,7 +21,7 @@ const StudentDetail: React.FC = () => {
     }
   }, [tab, activeTab]);
 
-  // Handle undefined id
+ 
   if (!id) {
     navigate("/student");
     return null;
@@ -29,7 +29,7 @@ const StudentDetail: React.FC = () => {
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);
-    navigate(`/student/${id}/${key}`);
+    navigate(`/student/${id}?tab=${key}`);
   };
 
   const tabs: Tab[] = [

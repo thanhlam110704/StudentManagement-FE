@@ -2,10 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Layout } from "antd";
 import MenuComponent from "./components/MenuComponent";
-import StudentTable from "./pages/Student/StudentTable";
-import StudentDetail from "./pages/Student/StudentDetail";
-import ClassTable from "./pages/Class/ClassTable";
-import ClassDetail from "./pages/Class/ClassDetail";
+import StudentTable from "./modules/Student/pages/StudentTable";
+import StudentDetail from "./modules/Student/pages/StudentDetail";
+import ClassTable from "./modules/Class/pages/ClassTable";
+import ClassDetail from "./modules/Class/pages/ClassDetail";
 import "./styles/app.css";
 
 const { Content } = Layout;
@@ -19,9 +19,9 @@ const App: React.FC = () => {
           <Content className="app-content">
             <Routes>
               <Route path="/class" element={<ClassTable />} />
-              <Route path="/class/:id/:tab" element={<ClassDetail />} />
+              <Route path="/class/:id" element={<ClassDetail />} />
               <Route path="/student" element={<StudentTable />} />
-              <Route path="/student/:id/:tab" element={<StudentDetail />} />
+              <Route path="/student/:id" element={<StudentDetail />} />
               <Route
                 path="/"
                 element={

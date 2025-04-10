@@ -4,12 +4,12 @@ import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import { AgGridReact } from "@ag-grid-community/react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import AddClassModal from "../../pages/Student/AddClassModal";
-import { fetchAvailableClasses, removeStudentFromClass } from "../../api/classStudentApi";
-import { getClassesListofStudent } from "../../api/studentApi";
-import { textFilterParams, dateFilterParams, numberFilterParams } from "../../utils/filterParams";
-import { getFilterModel } from "../../utils/filterModel";
-import { formatDate } from "../../utils/dateConvert";
+import AddClassModal from "../../ClassStudent/modal-form/AddClassModal";
+import { fetchAvailableClasses, removeStudentFromClass } from "../../ClassStudent/api/classStudentApi";
+import { getClassesListofStudent } from "../api/studentApi";
+import { textFilterParams, dateFilterParams, numberFilterParams } from "../../../utils/filterParams";
+import { getFilterModel } from "../../../utils/filterModel";
+import { formatDate } from "../../../utils/dateConvert";
 import { GridApi, GridReadyEvent, ColDef } from "@ag-grid-community/core";
 
 interface ClassData {

@@ -7,12 +7,12 @@ import { ModuleRegistry, GridApi, GridReadyEvent, ColDef } from "@ag-grid-commun
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import ClassForm, { ClassFormValues } from "./ClassForm"; 
-import { textFilterParams, dateFilterParams, numberFilterParams } from "../../utils/filterParams";
-import { deleteClass, getClasses, getClassDetail } from "../../api/classApi";
-import { getFilterModel } from '../../utils/filterModel';
-import { formatDate } from "../../utils/dateConvert";
-import "../../styles/table.component.css";
+import ClassForm, { ClassFormValues } from "../modal-form/ClassForm"; 
+import { textFilterParams, dateFilterParams, numberFilterParams } from "../../../utils/filterParams";
+import { deleteClass, getClasses, getClassDetail } from "../api/classApi";
+import { getFilterModel } from '../../../utils/filterModel';
+import { formatDate } from "../../../utils/dateConvert";
+import "../../../styles/table.component.css";
 import dayjs from "dayjs";
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
@@ -103,7 +103,6 @@ const ClassTable: React.FC = () => {
     setLoading(true);
     try {
       const data: ClassData = await getClassDetail(id);
-      // Convert string dates to Dayjs for ClassForm
       const formData: ClassFormValues = {
         ...data,
         startDate: data.startDate ? dayjs(data.startDate) : undefined,
@@ -189,7 +188,7 @@ const ClassTable: React.FC = () => {
         <div className="action-buttons">
           <Button
             icon={<InfoOutlined />}
-            onClick={() => navigate(`/class/${params.data.id}/InfomationClass`)}
+            onClick={() => navigate(`/class/${params.data.id}?tab=InfomationClass`)}
             className="action-button info"
           />
           <Button

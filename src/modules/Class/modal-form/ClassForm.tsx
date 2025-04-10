@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Form, Input, DatePicker, Button, message } from "antd";
 import dayjs, { Dayjs } from "dayjs";
-import { createClass, updateClass } from "../../api/classApi";
-import { handleApiError, ApiError } from "../../utils/handleApiErrors";
+import { createClass, updateClass } from "../api/classApi";
+import { handleApiError, ApiError } from "../../../utils/handleApiErrors";
 
 export interface ClassFormValues {
   id?: string | number;
@@ -71,22 +71,20 @@ const ClassForm: React.FC<ClassFormProps> = ({ initialValues, onSuccess }) => {
       <Form.Item
         name="name"
         label="Class Name"
-        rules={[{ required: true, message: "Please enter class name" }]}
-      >
+        required={true}>
         <Input placeholder="Enter class name" />
       </Form.Item>
 
       <Form.Item
         name="capacity"
         label="Capacity"
-        rules={[{ required: true, message: "Please enter capacity" }]}
-      >
+        required={true}> 
         <Input type="number" placeholder="Enter class capacity" />
       </Form.Item>
 
       <Row gutter={16}>
         <Col span={12}>
-          <Form.Item name="startDate" label="Start Date">
+          <Form.Item name="startDate" label="Start Date" required={true}>
             <DatePicker
               format="DD/MM/YYYY"
               style={{ width: "100%" }}
@@ -96,7 +94,7 @@ const ClassForm: React.FC<ClassFormProps> = ({ initialValues, onSuccess }) => {
         </Col>
 
         <Col span={12}>
-          <Form.Item name="endDate" label="End Date">
+          <Form.Item name="endDate" label="End Date" required={true}>
             <DatePicker
               format="DD/MM/YYYY"
               style={{ width: "100%" }}

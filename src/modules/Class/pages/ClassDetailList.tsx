@@ -2,12 +2,12 @@ import React, { useState, useEffect, useCallback, useRef, useMemo } from "react"
 import { Button, Popconfirm, message, Pagination } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import { AgGridReact } from "@ag-grid-community/react";
-import AddStudentModal from "./AddStudentModal";
-import { fetchAvailableStudents, removeStudentFromClass } from "../../api/classStudentApi";
-import { getStudentsListofClass } from "../../api/classApi";
-import { textFilterParams, dateFilterParams, numberFilterParams } from "../../utils/filterParams";
-import { getFilterModel } from '../../utils/filterModel';
-import { formatDate } from "../../utils/dateConvert";
+import AddStudentModal from "../../ClassStudent/modal-form/AddStudentModal";
+import { fetchAvailableStudents, removeStudentFromClass } from "../../ClassStudent/api/classStudentApi";
+import { getStudentsListofClass } from "../api/classApi";
+import { textFilterParams, dateFilterParams, numberFilterParams } from "../../../utils/filterParams";
+import { getFilterModel } from '../../../utils/filterModel';
+import { formatDate } from "../../../utils/dateConvert";
 import { GridApi, GridReadyEvent, ColDef } from "@ag-grid-community/core";
 
 interface Student {

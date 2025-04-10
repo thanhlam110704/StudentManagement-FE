@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Form, Input, DatePicker, Button, Radio, message } from "antd";
 import dayjs, { Dayjs } from "dayjs";
-import { createStudent, updateStudent } from "../../api/studentApi";
-import { handleApiError, ApiError } from "../../utils/handleApiErrors";
+import { createStudent, updateStudent } from "../api/studentApi";
+import { handleApiError, ApiError } from "../../../utils/handleApiErrors";
 
 export interface StudentFormValues {
   id?: string | number;
@@ -70,7 +70,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ initialValues, onSuccess }) =
       <Form.Item
         name="name"
         label="Full Name"
-        rules={[{ required: true, message: "Please enter full name" }]}
+        required={true}
       >
         <Input placeholder="Enter full name" />
       </Form.Item>
@@ -78,7 +78,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ initialValues, onSuccess }) =
       <Form.Item
         name="email"
         label="Email"
-        rules={[{ required: true, message: "Please enter email" }]}
+        required={true}
       >
         <Input placeholder="Enter email" />
       </Form.Item>
@@ -86,23 +86,24 @@ const StudentForm: React.FC<StudentFormProps> = ({ initialValues, onSuccess }) =
       <Form.Item
         name="phone"
         label="Phone Number"
-        rules={[{ required: true, message: "Please enter phone number" }]}
+        required={true}
       >
         <Input placeholder="Enter phone number" />
       </Form.Item>
 
-      <Form.Item name="gender" label="Gender">
+      <Form.Item name="gender" label="Gender" required={true}>
         <Radio.Group>
           <Radio value={true}>Male</Radio>
           <Radio value={false}>Female</Radio>
         </Radio.Group>
       </Form.Item>
 
-      <Form.Item name="dateOfBirth" label="Birth Date">
+      <Form.Item name="dateOfBirth" label="Birth Date" required={true}>
         <DatePicker
           format="DD/MM/YYYY"
           style={{ width: "100%" }}
           placeholder="Select birth date"
+          
         />
       </Form.Item>
 

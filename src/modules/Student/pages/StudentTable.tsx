@@ -7,12 +7,12 @@ import { ModuleRegistry, GridApi, GridReadyEvent, ColDef } from "@ag-grid-commun
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import StudentForm, { StudentFormValues } from "./StudentForm";
-import { getStudents, getStudentDetail, deleteStudent } from "../../api/studentApi";
-import { textFilterParams, dateFilterParams, numberFilterParams } from "../../utils/filterParams";
-import { getFilterModel } from "../../utils/filterModel";
-import { formatDate } from "../../utils/dateConvert";
-import "../../styles/table.component.css";
+import StudentForm, { StudentFormValues } from "../modal-form/StudentForm";
+import { getStudents, getStudentDetail, deleteStudent } from "../api/studentApi";
+import { textFilterParams, dateFilterParams, numberFilterParams } from "../../../utils/filterParams";
+import { getFilterModel } from "../../../utils/filterModel";
+import { formatDate } from "../../../utils/dateConvert";
+import "../../../styles/table.component.css";
 import dayjs from "dayjs";
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
@@ -192,7 +192,7 @@ const StudentTable: React.FC = () => {
           <div className="action-buttons">
             <Button
               icon={<InfoOutlined />}
-              onClick={() => navigate(`/student/${params.data.id}/InfomationStudent`)}
+              onClick={() => navigate(`/student/${params.data.id}?tab=InfomationStudent`)}
               className="action-button info"
             />
             <Button
